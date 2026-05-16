@@ -27,7 +27,7 @@ public class GuiListener implements Listener {
     Player player = (Player) e.getWhoClicked();
     Gui gui = (Gui) inventory.getHolder();
 
-    if (gui.getRankup().isSimilar(e.getCurrentItem())) {
+    if (gui.getNr(e.getSlot()) == Gui.RANKUP_NR) {
       if (FoliaScheduler.isFolia()) FoliaScheduler.getEntityScheduler().run(player, plugin, $ -> player.closeInventory(), null);
       else Bukkit.getScheduler().runTask(plugin, () -> player.closeInventory());
       if (gui.isPrestige()) {
@@ -35,7 +35,7 @@ public class GuiListener implements Listener {
       } else {
         plugin.getHelper().rankup(player);
       }
-    } else if (gui.getCancel().isSimilar(e.getCurrentItem())) {
+    } else if (gui.getNr(e.getSlot()) == Gui.CANCEL_NR) {
       final Runnable runnable = () -> {
         player.closeInventory();
         if (gui.isReturnToRanksGui()) {
